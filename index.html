@@ -17,16 +17,20 @@
 
     header {
       background: #ff8ac9;
-      padding: 25px;
+      padding: 25px 20px 35px;
       color: white;
-      font-size: 28px;
-      font-weight: 600;
       box-shadow: 0 4px 10px #ffb3da;
     }
 
     #logo {
-      width: 160px;
-      margin-top: 15px;
+      width: 260px;          /* logo más grande */
+      display: block;
+      margin: 0 auto 12px;   /* centrado y con espacio abajo */
+    }
+
+    .header-title {
+      font-size: 30px;
+      font-weight: 700;
     }
 
     .card {
@@ -55,8 +59,22 @@
     }
 
     .result {
-      margin-top: 40px;
-      font-size: 28px;
+      margin-top: 30px;
+      font-size: 26px;
+      font-weight: 600;
+      color: #ff2d96;
+    }
+
+    .description {
+      margin-top: 18px;
+      font-size: 17px;
+      color: #444;
+      line-height: 1.6;
+    }
+
+    .examples-title {
+      margin-top: 35px;
+      font-size: 20px;
       font-weight: 600;
       color: #ff2d96;
     }
@@ -67,21 +85,14 @@
       margin: 15px;
       box-shadow: 0 4px 10px rgba(0,0,0,0.15);
     }
-
-    iframe {
-      margin-top: 25px;
-      border-radius: 12px;
-    }
   </style>
 </head>
 
 <body>
 
 <header>
-  💖 The Pink Club – Face Shape Analyzer 💖
-  <div>
-    <img id="logo" src="./media/TPC cover.png">
-  </div>
+  <img id="logo" src="./media/TPC cover.png" alt="The Pink Club logo">
+  <div class="header-title">💖 The Pink Club – Face Shape Analyzer 💖</div>
 </header>
 
 <div class="card">
@@ -92,8 +103,10 @@
   <button class="btn" onclick="fakeAnalyze()">Analizar rostro</button>
 
   <div id="result" class="result"></div>
+  <div id="description" class="description"></div>
+
+  <div id="examplesTitle" class="examples-title"></div>
   <div id="examples" class="examples"></div>
-  <div id="video"></div>
 </div>
 
 <script>
@@ -101,51 +114,70 @@
     const shapes = ["Square", "Oval", "Round", "Heart"];
     const randomShape = shapes[Math.floor(Math.random() * shapes.length)];
 
+    // Título de resultado
     document.getElementById("result").innerHTML =
       "✨ Tu forma de rostro es: <b>" + randomShape + "</b>";
 
-    // Mostrar ejemplos según el tipo
+    // Texto de explicación y tips
+    let descriptionText = "";
     let htmlImages = "";
-    let video = "";
 
     if (randomShape === "Square") {
+      descriptionText = `
+        Tu rostro cuadrado se caracteriza por una mandíbula marcada y una frente amplia.
+        Para suavizar los ángulos, usa bronzer en los bordes de la frente y la mandíbula,
+        aplica el rubor en diagonal hacia la sien y resalta el centro del rostro con iluminador.
+      `;
       htmlImages = `
         <img src="./media/Cuadrado1.jpeg">
         <img src="./media/Cuadrado2.jpeg">
         <img src="./media/Cuadrado3.jpeg">
       `;
-      video = `<iframe width="560" height="315" src="https://www.youtube.com/watch?v=RF1oMaJOna8" allowfullscreen></iframe>`;
     }
 
     if (randomShape === "Oval") {
+      descriptionText = `
+        El rostro ovalado es muy equilibrado y armonioso. Te favorecen casi todos los estilos
+        de maquillaje. Resalta tus pómulos con rubor ligeramente hacia arriba, ilumina la parte
+        alta del pómulo y mantén las cejas suaves y definidas.
+      `;
       htmlImages = `
         <img src="./media/Ovalado1.jpeg">
         <img src="./media/Ovalado2.jpeg">
         <img src="./media/Ovalado3.jpeg">
       `;
-      video = `<iframe width="560" height="315" src="https://www.youtube.com/watch?v=zgP7Qnoki_Q" allowfullscreen></iframe>`;
     }
 
     if (randomShape === "Round") {
+      descriptionText = `
+        Tu rostro redondo tiene facciones suaves y mejillas más llenitas. Para estilizar,
+        aplica el bronzer debajo del pómulo y en los laterales de la frente, difuminando muy bien.
+        El rubor en diagonal y los contornos sutiles ayudarán a alargar visualmente el rostro.
+      `;
       htmlImages = `
         <img src="./media/Redondo1.jpeg">
         <img src="./media/Redondo2.jpeg">
         <img src="./media/Redondo3.jpeg">
       `;
-      video = `<iframe width="560" height="315" src="https://www.youtube.com/shorts/HU4c62oa5Qo" allowfullscreen></iframe>`;
     }
 
     if (randomShape === "Heart") {
+      descriptionText = `
+        El rostro corazón suele tener la frente más ancha y el mentón más fino. Equilibra
+        aplicando bronzer suave en la parte superior de la frente y un toque de rubor en el
+        centro de las mejillas. Ilumina la zona del mentón para darle más suavidad.
+      `;
       htmlImages = `
         <img src="./media/Corazon1.jpeg">
         <img src="./media/Corazon2.jpeg">
         <img src="./media/Corazon3.jpeg">
       `;
-      video = `<iframe width="560" height="315" src="https://www.youtube.com/watch?v=k_b2gi1jp78" allowfullscreen></iframe>`;
     }
 
+    document.getElementById("description").innerHTML = descriptionText;
+    document.getElementById("examplesTitle").innerHTML =
+      "✨ Inspírate con estos looks para tu tipo de rostro ✨";
     document.getElementById("examples").innerHTML = htmlImages;
-    document.getElementById("video").innerHTML = video;
   }
 </script>
 
