@@ -146,11 +146,41 @@
     const reasonText = document.getElementById("reason-text");
     const tipsText = document.getElementById("tips-text");
 
-    // FUNCIÓN DE DEMO (elige aleatoriamente)
+    // 🔮 DEMO: escoger forma de rostro aleatoria
     function fakePredictFaceShape() {
       const shapes = ["Square", "Oval", "Round", "Heart"];
       const idx = Math.floor(Math.random() * shapes.length);
       return shapes[idx];
+    }
+
+    function fillReasonAndTips(predictedShape) {
+      let reason = "";
+      let tips = "";
+
+      if (predictedShape === "Square") {
+        reason =
+          "Tu frente, pómulos y mandíbula tienen proporciones similares, creando líneas rectas y ángulos definidos.";
+        tips =
+          "Suaviza los laterales con contorno y coloca rubor en diagonal para equilibrar los ángulos.";
+      } else if (predictedShape === "Oval") {
+        reason =
+          "Tu rostro es más largo que ancho y la mandíbula es suave, creando una forma armónica.";
+        tips =
+          "Casi todos los estilos te favorecen. Enfatiza pómulos y mantén el contorno suave siguiendo tu estructura natural.";
+      } else if (predictedShape === "Round") {
+        reason =
+          "El largo y el ancho del rostro son similares y la mandíbula se percibe más redondeada.";
+        tips =
+          "Aplica contorno en los laterales de frente y mandíbula, y coloca rubor en diagonal para estilizar el rostro.";
+      } else if (predictedShape === "Heart") {
+        reason =
+          "La frente suele ser más amplia que la mandíbula y el mentón luce más afinado.";
+        tips =
+          "Equilibra la parte superior con bronzer suave en los laterales de la frente y coloca el rubor centrado hacia afuera.";
+      }
+
+      reasonText.textContent = reason;
+      tipsText.textContent = tips;
     }
 
     analyzeBtn.addEventListener("click", () => {
@@ -160,48 +190,20 @@
         return;
       }
 
+      // Mostrar loading
       loading.style.display = "block";
       results.style.display = "none";
 
+      // Simular “procesamiento”
       setTimeout(() => {
         const predictedShape = fakePredictFaceShape();
 
         shapeTitle.textContent = "Forma de rostro predicha: " + predictedShape;
-
-        let reason = "";
-        let tips = "";
-
-        if (predictedShape === "Square") {
-          reason =
-            "Tu frente, pómulos y mandíbula tienen proporciones similares, creando líneas rectas y ángulos definidos.";
-          tips =
-            "Suaviza los laterales con contorno y coloca rubor en diagonal para equilibrar los ángulos.";
-        }
-        if (predictedShape === "Oval") {
-          reason =
-            "Tu rostro es más largo que ancho y la mandíbula es suave, creando una forma armónica.";
-          tips =
-            "Casi todos los estilos funcionan. Enfatiza pómulos y mantén el contorno suave.";
-        }
-        if (predictedShape === "Round") {
-          reason =
-            "Tu rostro tiene ancho y largo similares, y la mandíbula se percibe más redondeada.";
-          tips =
-            "Aplica contorno en líneas diagonales y usa rubor elevado para estilizar la forma.";
-        }
-        if (predictedShape === "Heart") {
-          reason =
-            "Tu frente es más amplia que la mandíbula y el mentón se ve más afinado.";
-          tips =
-            "Equilibra la parte superior con bronzer suave y coloca rubor centrado hacia afuera.";
-        }
-
-        reasonText.textContent = reason;
-        tipsText.textContent = tips;
+        fillReasonAndTips(predictedShape);
 
         loading.style.display = "none";
         results.style.display = "block";
-      }, 1200);
+      }, 1000);
     });
   </script>
 </body>
